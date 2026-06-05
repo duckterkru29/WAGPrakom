@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Biodata ASN Kemenag - Pranata Komputer Ahli Pertama 2024</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1d4ed8 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .input-field {
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+        }
+        .input-field:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.4);
+        }
+        .btn-primary:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .error-shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        .hidden { display: none; }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .logo-kemenag {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 20px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .status-valid {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status-invalid {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .progress-bar {
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        .info-card {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            transition: all 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+        .syarat-list {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .syarat-list ul li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
+        }
+        .syarat-list ul li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: bold;
+        }
+        .syarat-list ul li.valid::before {
+            content: "✓";
+            color: #16a34a;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="logo-kemenag">K</div>
+            <h1 class="text-3xl font-bold text-white mb-2">Kementerian Agama Republik Indonesia</h1>
+            <p class="text-white/80 text-lg">Sistem Verifikasi Biodata ASN</p>
+            <p class="text-white/60 text-sm mt-1">Jabatan: Pranata Komputer Ahli Pertama - Tahun 2024</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="glass-card p-8">
+            <!-- Info Card -->
+            <div class="info-card">
+                <p class="text-sm text-blue-800 font-semibold mb-1">📢 Informasi Penting</p>
+                <p class="text-sm text-blue-700">Grup WhatsApp ini khusus untuk ASN Kemenag dengan jabatan <strong>Pranata Komputer Ahli Pertama</strong> yang ditetapkan pada tahun <strong>2024</strong>. Jabatan lain maupun tahun lain <strong>TIDAK DAPAT</strong> bergabung.</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+
+            <!-- Validation Status -->
+            <div id="validationStatus" class="mb-6 text-center hidden">
+                <span id="statusBadge" class="status-badge"></span>
+            </div>
+
+            <form id="biodataForm" class="space-y-6">
+                <!-- NIP -->
+                <div class="form-group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Nomor Induk Pegawai (NIP) <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="nip" class="input-field w-full px-4 py-3 rounded-lg text-gray-800" 
+                           placeholder="Contoh: 198501012024011001" maxlength="18">
+                    <p class="text-xs text-gray-500 mt-1">Masukkan 18 digit NIP</p>
+                </div>
+
+                <!-- Nama Lengkap -->
+                <div class="form-group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Nama Lengkap <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="nama" class="input-field w-full px-4 py-3 rounded-lg text-gray-800" 
+                           placeholder="Masukkan nama lengkap sesuai SK">
+                </div>
+
+                <!-- Jabatan -->
+                <div class="form-group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Jabatan <span class="text-red-500">*</span>
+                    </label>
+                    <select id="jabatan" class="input-field w-full px-4 py-3 rounded-lg text-gray-800 bg-white">
+                        <option value="">-- Pilih Jabatan --</option>
+                        <option value="pranata_komputer_ahli_pertama">Pranata Komputer Ahli Pertama</option>
+                        <option value="pranata_komputer_ahli_muda">Pranata Komputer Ahli Muda</option>
+                        <option value="pranata_komputer_ahli_madya">Pranata Komputer Ahli Madya</option>
+                        <option value="pranata_komputer_ahli_utama">Pranata Komputer Ahli Utama</option>
+                        <option value="pranata_komputer_terampil">Pranata Komputer Terampil</option>
+                        <option value="pranata_komputer_mahir">Pranata Komputer Mahir</option>
+                        <option value="pranata_komputer_penyelia">Pranata Komputer Penyelia</option>
+                        <option value="lainnya">Jabatan Lainnya</option>
+                    </select>
+                    <p class="text-xs text-red-500 mt-1 font-semibold">⚠️ Hanya jabatan "Pranata Komputer Ahli Pertama" yang dapat bergabung</p>
+                </div>
+
+                <!-- Tahun Pengangkatan -->
+                <div class="form-group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Tahun Pengangkatan/Penetapan Jabatan <span class="text-red-500">*</span>
+                    </label>
+                    <select id="tahun" class="input-field w-full px-4 py-3 rounded-lg text-gray-800 bg-white">
+                        <option value="">-- Pilih Tahun --</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="lainnya">Tahun Lainnya</option>
+                    </select>
+                    <p class="text-xs text-red-500 mt-1 font-semibold">⚠️ Hanya tahun 2024 yang dapat bergabung ke grup WhatsApp</p>
+                </div>
+
+                <!-- Unit Kerja -->
+                <div class="form-group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Unit Kerja <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="unitKerja" class="input-field w-full px-4 py-3 rounded-lg text-gray-800" 
+                           placeholder="Contoh: Direktorat Jenderal Pendidikan Islam">
+                </div>
+
+                <!-- Nomor HP -->
+                <div class="form-group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Nomor HP (WhatsApp) <span class="text-red-500">*</span>
+                    </label>
+                    <input type="tel" id="noHp" class="input-field w-full px-4 py-3 rounded-lg text-gray-800" 
+                           placeholder="Contoh: 081234567890">
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Email <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email" id="email" class="input-field w-full px-4 py-3 rounded-lg text-gray-800" 
+                           placeholder="Contoh: nama@kemenag.go.id">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" id="submitBtn" class="btn-primary w-full py-4 rounded-lg text-white font-semibold text-lg">
+                        Verifikasi & Dapatkan Link Grup WhatsApp
+                    </button>
+                </div>
+            </form>
+
+            <!-- Result Section (Hidden by default) -->
+            <div id="resultSection" class="hidden mt-8 text-center fade-in">
+                <div id="successResult" class="hidden">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Verifikasi Berhasil!</h2>
+                    <p class="text-gray-600 mb-2">Selamat, Anda memenuhi syarat untuk bergabung ke grup WhatsApp.</p>
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
+                        <p class="text-sm text-gray-600 mb-3">Klik tombol di bawah untuk bergabung ke grup:</p>
+                        <a href="https://chat.whatsapp.com/K06fsdozTtw2dtsbrTRUJ7" 
+                           target="_blank"
+                           class="whatsapp-btn inline-flex items-center px-8 py-4 text-white rounded-xl font-bold text-lg hover:no-underline">
+                            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                            Gabung Grup WhatsApp
+                        </a>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <p class="text-sm text-blue-800 font-semibold">📋 Data Terverifikasi:</p>
+                        <div id="verifiedData" class="text-left text-sm text-blue-700 mt-2 space-y-1"></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4">Link grup aktif selama 7 hari. Segera bergabung!</p>
+                </div>
+
+                <div id="errorResult" class="hidden">
+                    <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Verifikasi Gagal</h2>
+                    <p class="text-gray-600 mb-4" id="errorMessage">Maaf, Anda tidak memenuhi syarat untuk bergabung.</p>
+
+                    <div class="syarat-list mb-6 text-left">
+                        <p class="text-sm text-red-800 font-bold mb-3">📋 Syarat Bergabung Grup:</p>
+                        <ul class="text-sm text-red-700 space-y-2" id="syaratList">
+                            <li id="syaratJabatan">Jabatan harus: <strong>Pranata Komputer Ahli Pertama</strong></li>
+                            <li id="syaratTahun">Tahun pengangkatan harus: <strong>2024</strong></li>
+                        </ul>
+                        <p class="text-xs text-red-600 mt-3 italic">Catatan: Jabatan di atasnya (Ahli Muda, Madya, Utama) juga TIDAK dapat bergabung ke grup ini.</p>
+                    </div>
+
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                        <p class="text-sm text-gray-600 mb-2">Data Anda:</p>
+                        <div id="userDataDisplay" class="text-left text-sm text-gray-700 space-y-1"></div>
+                    </div>
+
+                    <button onclick="resetForm()" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition font-semibold">
+                        🔄 Coba Lagi
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-6 text-white/60 text-sm">
+            <p>© 2024 Kementerian Agama Republik Indonesia</p>
+            <p class="mt-1">Sistem Informasi Manajemen Kepegawaian</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('biodataForm');
+        const progressBar = document.getElementById('progressBar');
+        const validationStatus = document.getElementById('validationStatus');
+        const statusBadge = document.getElementById('statusBadge');
+        const resultSection = document.getElementById('resultSection');
+        const successResult = document.getElementById('successResult');
+        const errorResult = document.getElementById('errorResult');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const verifiedData = document.getElementById('verifiedData');
+        const userDataDisplay = document.getElementById('userDataDisplay');
+        const syaratJabatan = document.getElementById('syaratJabatan');
+        const syaratTahun = document.getElementById('syaratTahun');
+
+        // Update progress bar
+        function updateProgress() {
+            const fields = ['nip', 'nama', 'jabatan', 'tahun', 'unitKerja', 'noHp', 'email'];
+            let filled = 0;
+            fields.forEach(field => {
+                if (document.getElementById(field).value.trim() !== '') filled++;
+            });
+            const progress = (filled / fields.length) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        // Add event listeners to all inputs
+        const inputs = form.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('input', updateProgress);
+            input.addEventListener('change', updateProgress);
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nip = document.getElementById('nip').value.trim();
+            const nama = document.getElementById('nama').value.trim();
+            const jabatan = document.getElementById('jabatan').value;
+            const tahun = document.getElementById('tahun').value;
+            const unitKerja = document.getElementById('unitKerja').value.trim();
+            const noHp = document.getElementById('noHp').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            // Validation
+            let errors = [];
+
+            if (!nip || nip.length !== 18) {
+                errors.push('NIP harus 18 digit');
+                document.getElementById('nip').classList.add('error-shake');
+                setTimeout(() => document.getElementById('nip').classList.remove('error-shake'), 500);
+            }
+
+            if (!nama) errors.push('Nama lengkap wajib diisi');
+            if (!jabatan) errors.push('Jabatan wajib dipilih');
+            if (!tahun) errors.push('Tahun wajib dipilih');
+            if (!unitKerja) errors.push('Unit kerja wajib diisi');
+            if (!noHp) errors.push('Nomor HP wajib diisi');
+            if (!email || !email.includes('@')) errors.push('Email valid wajib diisi');
+
+            if (errors.length > 0) {
+                alert('Mohon lengkapi data berikut:
+• ' + errors.join('
+• '));
+                return;
+            }
+
+            // Get jabatan label for display
+            const jabatanSelect = document.getElementById('jabatan');
+            const jabatanLabel = jabatanSelect.options[jabatanSelect.selectedIndex].text;
+
+            // Get tahun label for display
+            const tahunSelect = document.getElementById('tahun');
+            const tahunLabel = tahunSelect.options[tahunSelect.selectedIndex].text;
+
+            // STRICT VERIFICATION: Only Pranata Komputer Ahli Pertama + Tahun 2024
+            const isEligible = (jabatan === 'pranata_komputer_ahli_pertama') && (tahun === '2024');
+
+            // Show result
+            form.style.display = 'none';
+            resultSection.classList.remove('hidden');
+            validationStatus.classList.remove('hidden');
+
+            if (isEligible) {
+                statusBadge.className = 'status-badge status-valid';
+                statusBadge.innerHTML = `
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Memenuhi Syarat
+                `;
+                successResult.classList.remove('hidden');
+                errorResult.classList.add('hidden');
+
+                // Display verified data
+                verifiedData.innerHTML = `
+                    <p>👤 <strong>Nama:</strong> ${nama}</p>
+                    <p>🆔 <strong>NIP:</strong> ${nip}</p>
+                    <p>💼 <strong>Jabatan:</strong> ${jabatanLabel}</p>
+                    <p>📅 <strong>Tahun:</strong> ${tahunLabel}</p>
+                    <p>🏢 <strong>Unit Kerja:</strong> ${unitKerja}</p>
+                `;
+
+                // Log data (simulation)
+                console.log('✅ Data TERVERIFIKASI:', {
+                    nip, nama, jabatan, jabatanLabel, tahun, unitKerja, noHp, email,
+                    timestamp: new Date().toISOString(),
+                    status: 'ELIGIBLE',
+                    message: 'Berhasil - Dapat bergabung ke grup WhatsApp'
+                });
+            } else {
+                statusBadge.className = 'status-badge status-invalid';
+                statusBadge.innerHTML = `
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                    Tidak Memenuhi Syarat
+                `;
+                successResult.classList.add('hidden');
+                errorResult.classList.remove('hidden');
+
+                // Determine specific reason
+                let reasons = [];
+                if (jabatan !== 'pranata_komputer_ahli_pertama') {
+                    reasons.push(`jabatan Anda adalah "${jabatanLabel}" (bukan Pranata Komputer Ahli Pertama)`);
+                }
+                if (tahun !== '2024') {
+                    reasons.push(`tahun pengangkatan Anda adalah ${tahunLabel} (bukan 2024)`);
+                }
+
+                const reasonText = reasons.join(' dan ');
+                errorMessage.innerHTML = `Maaf, ${reasonText}.<br><br>Anda <strong>TIDAK DAPAT</strong> bergabung ke grup WhatsApp ini.`;
+
+                // Update syarat list with checkmarks for what's correct
+                if (jabatan === 'pranata_komputer_ahli_pertama') {
+                    syaratJabatan.classList.add('valid');
+                    syaratJabatan.innerHTML = '✓ Jabatan: <strong>Pranata Komputer Ahli Pertama</strong> (Sesuai)';
+                } else {
+                    syaratJabatan.classList.remove('valid');
+                    syaratJabatan.innerHTML = '✗ Jabatan harus: <strong>Pranata Komputer Ahli Pertama</strong> (Anda: ' + jabatanLabel + ')';
+                }
+
+                if (tahun === '2024') {
+                    syaratTahun.classList.add('valid');
+                    syaratTahun.innerHTML = '✓ Tahun pengangkatan: <strong>2024</strong> (Sesuai)';
+                } else {
+                    syaratTahun.classList.remove('valid');
+                    syaratTahun.innerHTML = '✗ Tahun pengangkatan harus: <strong>2024</strong> (Anda: ' + tahunLabel + ')';
+                }
+
+                // Display user data
+                userDataDisplay.innerHTML = `
+                    <p>👤 <strong>Nama:</strong> ${nama}</p>
+                    <p>🆔 <strong>NIP:</strong> ${nip}</p>
+                    <p>💼 <strong>Jabatan:</strong> ${jabatanLabel}</p>
+                    <p>📅 <strong>Tahun:</strong> ${tahunLabel}</p>
+                    <p>🏢 <strong>Unit Kerja:</strong> ${unitKerja}</p>
+                `;
+
+                // Log data (simulation)
+                console.log('❌ Data TIDAK MEMENUHI SYARAT:', {
+                    nip, nama, jabatan, jabatanLabel, tahun, unitKerja, noHp, email,
+                    timestamp: new Date().toISOString(),
+                    status: 'NOT_ELIGIBLE',
+                    reasons
+                });
+            }
+        });
+
+        function resetForm() {
+            form.reset();
+            form.style.display = 'block';
+            resultSection.classList.add('hidden');
+            validationStatus.classList.add('hidden');
+            successResult.classList.add('hidden');
+            errorResult.classList.add('hidden');
+            progressBar.style.width = '0%';
+            syaratJabatan.classList.remove('valid');
+            syaratTahun.classList.remove('valid');
+        }
+    </script>
+</body>
+</html>
